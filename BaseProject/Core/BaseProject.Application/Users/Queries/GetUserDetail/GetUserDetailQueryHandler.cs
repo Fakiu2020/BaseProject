@@ -52,8 +52,11 @@ namespace BaseProject.Application.Users.Queries.GetAllUsers
                 FirstName=user.FirstName,
                 LastName=user.LastName,
                 Email=user.Email,
-                Roles = user.Roles.AsQueryable().ProjectTo<RolViewModel>(_mapper.ConfigurationProvider).ToList()                                    
-        };
+                Roles = user.Roles.AsQueryable().ProjectTo<RolesViewModel>(_mapper.ConfigurationProvider).ToList()
+
+
+                                        
+            };
 
         }
     }

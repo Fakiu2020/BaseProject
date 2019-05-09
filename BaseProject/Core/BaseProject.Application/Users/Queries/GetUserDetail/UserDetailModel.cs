@@ -13,6 +13,6 @@ namespace BaseProject.Application.Users.Queries.GetAllUsers
         public string LastName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public List<RolViewModel> Roles{ get; set; }
+        public List<RolesViewModel> Roles{ get; set; }
     }
 }

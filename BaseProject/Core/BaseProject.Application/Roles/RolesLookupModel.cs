@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
-using BaseProject.Application.Common;
+using BaseProject.Application.Roles;
 using BaseProject.Domain;
 using Whoever.Common.Mapping;
 
 namespace BaseProject.Application.Roles
 {
-    public class RolViewModel 
+    public class RolesLookupModel
     {
-        public int Id{ get; set; }
-        public string Name{ get; set; }
-
+        public IList<RolesViewModel> Roles { get; set; }
     }
 }
