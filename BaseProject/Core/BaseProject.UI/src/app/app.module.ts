@@ -46,6 +46,7 @@ import { LoaderService } from './_services/loader.service';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderInterceptor } from './_helpers/loader.interceptor';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { RolesService } from './_services/roles.service';
 
 
 export function tokenGetter() {
@@ -98,6 +99,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
    providers: [
       AuthService,
       LoaderService,
+      RolesService,
       AuthGuard,
       ErrorInterceptorProvider,
       LoaderInterceptor,

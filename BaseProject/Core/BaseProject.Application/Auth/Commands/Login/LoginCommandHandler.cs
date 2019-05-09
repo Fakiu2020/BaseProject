@@ -32,6 +32,7 @@ namespace BaseProject.Application.Auth.Commands.Login
         {
             // ensure we have a user with the given user name
             var user = await _userManager.FindByNameAsync(request.Email);
+            
             if (user == null)
             {
                 ValidationFailure[] errors = new ValidationFailure[] { new ValidationFailure("Email", "Invalid Email") };

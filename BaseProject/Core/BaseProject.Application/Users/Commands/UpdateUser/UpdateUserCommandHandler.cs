@@ -30,11 +30,25 @@ namespace BaseProject.Application.Users.Administrators.Commands.UpdateAdministra
             {
                 throw new NotFoundException(nameof(User), request.Id);
             }
-            
+            foreach (var item in request.Roles)
+            {
+                if (item.Checked)
+                {
+                   var result = await _userManager.AddToRoleAsync(entity, item.Name);
+                }
+                else
+                {
+                    var result = await _userManager.RemoveFromRoleAsync(entity, item.Name);
+                }
+                
+               
+            }
+
             entity.PhoneNumber = request.PhoneNumber;
             entity.FirstName = request.FirstName;
             entity.LastName = request.LastName;
             entity.Email = request.Email;
+            entity.PhoneNumber = request.PhoneNumber;
             await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

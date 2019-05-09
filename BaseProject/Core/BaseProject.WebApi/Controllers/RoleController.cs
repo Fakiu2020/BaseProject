@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BaseProject.WebApi.Controller
 {
-    public class RoleController : BaseController
+    public class RolesController : BaseController
     {
       
         /// <summary>

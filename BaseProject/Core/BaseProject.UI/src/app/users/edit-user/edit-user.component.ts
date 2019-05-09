@@ -4,6 +4,7 @@ import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { User } from 'src/app/models/user';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { RolesService } from 'src/app/_services/roles.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -13,17 +14,20 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 export class EditUserComponent implements OnInit {
   updateUserForm: FormGroup;
   user: any = {};
-  
+  roles:any=[];
   isUser: number;
+
   constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
-    private userService: UserService, private alertService: AlertifyService) { }
+              private userService: UserService, private alertService: AlertifyService,
+              private rolesSerice:RolesService) { }
 
   
   
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.user = (data.user);  
+      this.user = (data.user);        
       this.createUpdateForm();
+      this.getAllRoles();
     });
   }
 
@@ -36,6 +40,7 @@ export class EditUserComponent implements OnInit {
         firstName: [this.user.firstName, Validators.required],
         lastName: [this.user.lastName, Validators.required],
         phoneNumber: [this.user.phoneNumber],
+        roles:[this.user.roles]
       }
     );
   }
@@ -44,18 +49,50 @@ export class EditUserComponent implements OnInit {
   updateUser() {
     if (this.updateUserForm.invalid) { return; }
     this.user = Object.assign({}, this.updateUserForm.value);
-
     this.userService.updateUser(this.user).subscribe(next => {
     }, error => {
       this.alertService.error(error);
-    }, () => {
-      // this.router.navigate(['/users']);
+    }, () => {     
       this.alertService.success('Modified Successfully');
     });
+  }
+
+
+  getAllRoles(){
+    this.rolesSerice.getAllRoles().subscribe( data=>{
+     this.roles=data.roles; 
+     this.matchRoles();  
+    }, error=>{
+      this.alertService.error(error);
+    })
   }
 
   cancel() {
     this.router.navigate(['/users']);
   }
 
+  matchRoles(){    
+    for (let i = 0; i < this.user.roles.length; i++) {        
+        for(let j=0; j< this.roles.length;j++){
+           if(this.user.roles[i].id==this.roles[j].id){
+              this.roles[j].checked=true;
+              this.user.roles[i].checked=true;
+              break;              
+           } 
+        }   
+    }    
+  }
+
+  rolChecked(rol){    
+    rol.checked=!rol.checked;
+    if(rol.checked){
+       this.user.roles.push(rol);
+       return;
+    }
+      const index=this.user.roles.filter(obj => {
+        if(obj.id === rol.id){
+          obj.checked=false;       
+        }
+    });
+  }
 }

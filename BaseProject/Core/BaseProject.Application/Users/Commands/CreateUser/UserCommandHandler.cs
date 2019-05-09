@@ -31,9 +31,9 @@ namespace BaseProject.Application.Auth.Commands.Login
         }
 
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
-        {
+        {                                    
             var user = _mapper.Map<User>(request);
-
+            
             using (var ts = _context.BeginTransaction())
             {
                 try
@@ -44,8 +44,11 @@ namespace BaseProject.Application.Auth.Commands.Login
                     {
                         throw new ValidationException(result.ToValidationFailureList());
                     }
+                    foreach (var item in request.Roles)
+                    {
+                        result = await _userManager.AddToRoleAsync(user, item.Name);                        
+                    }
 
-                    //result = await _userManager.AddToRoleAsync(user, RolesNames.Admin.Name);
                     if (!result.Succeeded)
                     {
                         throw new ValidationException(result.ToValidationFailureList());

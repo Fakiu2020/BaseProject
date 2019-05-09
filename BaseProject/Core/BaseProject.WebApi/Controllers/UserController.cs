@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BaseProject.WebApi.Controller
 {
+    [Authorize]
     public class UserController : BaseController
     {
       

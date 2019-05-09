@@ -14,5 +14,7 @@ namespace BaseProject.Application.Users.Queries.GetAllUsers
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public List<RolesViewModel> Roles{ get; set; }
+
+
     }
 }
