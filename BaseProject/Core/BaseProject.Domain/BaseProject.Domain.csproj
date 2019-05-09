@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Braintree\**" />
+    <Compile Remove="Common\**" />
+    <Compile Remove="Enums\**" />
+    <Compile Remove="GymMemberPlan\**" />
+    <Compile Remove="GymMember\**" />
+    <Compile Remove="GymPlan\**" />
+    <Compile Remove="Gym\**" />
+    <Compile Remove="Payments\**" />
+    <EmbeddedResource Remove="Braintree\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <EmbeddedResource Remove="Enums\**" />
+    <EmbeddedResource Remove="GymMemberPlan\**" />
+    <EmbeddedResource Remove="GymMember\**" />
+    <EmbeddedResource Remove="GymPlan\**" />
+    <EmbeddedResource Remove="Gym\**" />
+    <EmbeddedResource Remove="Payments\**" />
+    <None Remove="Braintree\**" />
+    <None Remove="Common\**" />
+    <None Remove="Enums\**" />
+    <None Remove="GymMemberPlan\**" />
+    <None Remove="GymMember\**" />
+    <None Remove="GymPlan\**" />
+    <None Remove="Gym\**" />
+    <None Remove="Payments\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="JWT\ApplicationClient.cs" />
+    <Compile Remove="User\Administrator.cs" />
+    <Compile Remove="User\GymMember.cs" />
+    <Compile Remove="User\GymMonitor.cs" />
+    <Compile Remove="User\GymOwner.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="2.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Whoever\Whoever.Common\Whoever.Common.csproj" />
+    <ProjectReference Include="..\Whoever\Whoever.Entities\Whoever.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

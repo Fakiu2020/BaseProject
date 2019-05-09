@@ -1,0 +1,70 @@
+
+ <div class="row justify-content-center">
+  <div class="col-6 align-self-center">
+    <form [formGroup]="updateUserForm" (ngSubmit)="updateUser()">
+      <h2 class="text-center text-primary">Edit User</h2>
+      <hr />
+
+      <div class="form-group">
+        <label class="">Email</label>
+        <input
+          type="text"      
+          [ngClass]="{'is-invalid': updateUserForm.get('email').errors 
+          && updateUserForm.get('email').touched}"
+          class="form-control"
+          formControlName="email"
+          placeholder="Email"
+        />
+       
+        <div class="invalid-feedback" *ngIf="updateUserForm.get('email').errors">            
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+          <label class="">First Name</label>
+          <input     
+            type="text"          
+            class="form-control"
+            formControlName="firstName"
+            placeholder="First Name"
+          />
+        </div>
+
+        <div class="form-group">
+            <label class="">Last Name</label>
+            <input     
+              type="text"          
+              class="form-control"
+              formControlName="lastName"
+              placeholder="Last Name"
+            />
+          </div>
+
+      <div class="form-group">
+        <label class="">Phone Number</label>
+        <input     
+          type="text"          
+          class="form-control"
+          formControlName="phoneNumber"
+          placeholder="Phone Number"
+        />
+      </div>
+
+      <div class="form-group">
+        <button
+          class="btn btn-success mr-2"
+          [disabled]="!updateUserForm.valid"
+          type="submit"
+        >
+          Save
+        </button>
+        <button class="btn btn-secondary" type="button" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div> 

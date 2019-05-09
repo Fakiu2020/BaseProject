@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Configurations\Braintree\**" />
+    <Compile Remove="Configurations\Common\**" />
+    <Compile Remove="Configurations\GymMemberPlan\**" />
+    <Compile Remove="Configurations\GymMember\**" />
+    <Compile Remove="Configurations\Gym\**" />
+    <Compile Remove="Configurations\Payments\**" />
+    <EmbeddedResource Remove="Configurations\Braintree\**" />
+    <EmbeddedResource Remove="Configurations\Common\**" />
+    <EmbeddedResource Remove="Configurations\GymMemberPlan\**" />
+    <EmbeddedResource Remove="Configurations\GymMember\**" />
+    <EmbeddedResource Remove="Configurations\Gym\**" />
+    <EmbeddedResource Remove="Configurations\Payments\**" />
+    <None Remove="Configurations\Braintree\**" />
+    <None Remove="Configurations\Common\**" />
+    <None Remove="Configurations\GymMemberPlan\**" />
+    <None Remove="Configurations\GymMember\**" />
+    <None Remove="Configurations\Gym\**" />
+    <None Remove="Configurations\Payments\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Configurations\JWT\ApplicationClientConfiguration.cs" />
+    <Compile Remove="Configurations\User\AdministratorConfiguration.cs" />
+    <Compile Remove="Configurations\User\GymMemberConfiguration.cs" />
+    <Compile Remove="Configurations\User\GymMonitorConfiguration.cs" />
+    <Compile Remove="Configurations\User\GymOwnerConfiguration.cs" />
+    <Compile Remove="Migrations\20190226203856_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190226203955_InitialCreate.cs" />
+    <Compile Remove="Migrations\20190226204959_InitialCreate.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BaseProject.Domain\BaseProject.Domain.csproj" />
+    <ProjectReference Include="..\Whoever\Whoever.Data\Whoever.Data.csproj" />
+    <ProjectReference Include="..\Whoever\Whoever.Data.EntityFramework\Whoever.Data.EntityFramework.csproj" />
+    <ProjectReference Include="..\Whoever\Whoever.Entities\Whoever.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
