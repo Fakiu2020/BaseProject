@@ -15,7 +15,7 @@ namespace BaseProject.Application.Users.CreateUser
         public string LastName{ get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
-        public List<RolesViewModel> Roles { get; set; }
+        public List<string> Roles { get; set; }
 
 
         public void CreateMappings(Profile configuration)

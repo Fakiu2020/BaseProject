@@ -5,6 +5,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { User } from 'src/app/models/user';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { RolesService } from 'src/app/_services/roles.service';
+import { elementEnd } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-edit-user',
@@ -39,8 +40,7 @@ export class EditUserComponent implements OnInit {
         email: [this.user.email, [Validators.required, Validators.email]],
         firstName: [this.user.firstName, Validators.required],
         lastName: [this.user.lastName, Validators.required],
-        phoneNumber: [this.user.phoneNumber],
-        roles:[this.user.roles]
+        phoneNumber: [this.user.phoneNumber]        
       }
     );
   }
@@ -49,14 +49,24 @@ export class EditUserComponent implements OnInit {
   updateUser() {
     if (this.updateUserForm.invalid) { return; }
     this.user = Object.assign({}, this.updateUserForm.value);
+    this.user.roles = this.getRolesSelected();
+    this.getRolesSelected();
     this.userService.updateUser(this.user).subscribe(next => {
     }, error => {
       this.alertService.error(error);
-    }, () => {     
+    }, () => {
       this.alertService.success('Modified Successfully');
     });
   }
-
+  getRolesSelected(){
+    const result = [];
+    this.roles.forEach((value, key: string) => {
+        if (value.checked === true){
+          result.push(value.name);
+        }
+    });
+    return result;
+  }
 
   getAllRoles(){
     this.rolesSerice.getAllRoles().subscribe( data=>{
@@ -74,25 +84,12 @@ export class EditUserComponent implements OnInit {
   matchRoles(){    
     for (let i = 0; i < this.user.roles.length; i++) {        
         for(let j=0; j< this.roles.length;j++){
-           if(this.user.roles[i].id==this.roles[j].id){
+           if(this.user.roles[i]==this.roles[j].name){
               this.roles[j].checked=true;
-              this.user.roles[i].checked=true;
               break;              
            } 
         }   
     }    
   }
 
-  rolChecked(rol){    
-    rol.checked=!rol.checked;
-    if(rol.checked){
-       this.user.roles.push(rol);
-       return;
-    }
-      const index=this.user.roles.filter(obj => {
-        if(obj.id === rol.id){
-          obj.checked=false;       
-        }
-    });
   }
-}

@@ -78,7 +78,7 @@ export class CreateUserComponent implements OnInit {
   rolChecked(rol){    
     rol.checked=!rol.checked;
     if(rol.checked){
-       this.rolesSelected.push(rol);
+       this.rolesSelected.push(rol.name);
        return;
     }
       const index=this.rolesSelected.indexOf(rol)

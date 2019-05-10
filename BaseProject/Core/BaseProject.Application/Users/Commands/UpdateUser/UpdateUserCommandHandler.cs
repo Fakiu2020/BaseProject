@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -25,30 +26,26 @@ namespace BaseProject.Application.Users.Administrators.Commands.UpdateAdministra
 
         public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Users.FindAsync(request.Id);
-            if (entity == null)
+            var user = await _context.Users.FindAsync(request.Id);
+            if (user == null)
             {
                 throw new NotFoundException(nameof(User), request.Id);
             }
-            foreach (var item in request.Roles)
-            {
-                if (item.Checked)
-                {
-                   var result = await _userManager.AddToRoleAsync(entity, item.Name);
-                }
-                else
-                {
-                    var result = await _userManager.RemoveFromRoleAsync(entity, item.Name);
-                }
-                
-               
-            }
 
-            entity.PhoneNumber = request.PhoneNumber;
-            entity.FirstName = request.FirstName;
-            entity.LastName = request.LastName;
-            entity.Email = request.Email;
-            entity.PhoneNumber = request.PhoneNumber;
+            var userRoles =await _userManager.GetRolesAsync(user);       
+            var selectedRoles = request.Roles ?? new string[]{};
+            var result = await _userManager.AddToRolesAsync(user, selectedRoles.Except(userRoles));
+            if (!result.Succeeded)
+                throw new ValidationException(result.ToValidationFailureList());
+
+            result = await _userManager.RemoveFromRolesAsync(user, userRoles.Except(selectedRoles));
+            if (!result.Succeeded)
+                throw new ValidationException(result.ToValidationFailureList());
+
+            user.FirstName = request.FirstName;
+            user.LastName = request.LastName;
+            user.Email = request.Email;
+            user.PhoneNumber = request.PhoneNumber;
             await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

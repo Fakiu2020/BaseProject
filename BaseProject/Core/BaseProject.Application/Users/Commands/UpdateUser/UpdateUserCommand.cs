@@ -14,7 +14,7 @@ namespace BaseProject.Application.Users.Commands.UpdateUser
         public string PhoneNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public List<RolesViewModel> Roles{ get; set; }
+        public IList<string> Roles{ get; set; }
 
         public void CreateMappings(Profile configuration)
         {

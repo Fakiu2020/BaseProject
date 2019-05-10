@@ -40,19 +40,14 @@ namespace BaseProject.Application.Auth.Commands.Login
                 {
                     var result = await _userManager.CreateAsync(user, request.Password);
 
-                    if (!result.Succeeded)
-                    {
+                    if (!result.Succeeded)                    
                         throw new ValidationException(result.ToValidationFailureList());
-                    }
-                    foreach (var item in request.Roles)
-                    {
-                        result = await _userManager.AddToRoleAsync(user, item.Name);                        
-                    }
-
-                    if (!result.Succeeded)
-                    {
-                        throw new ValidationException(result.ToValidationFailureList());
-                    }
+                    
+                    
+                    result = await _userManager.AddToRolesAsync(user, request.Roles);                        
+                   
+                    if (!result.Succeeded)                    
+                        throw new ValidationException(result.ToValidationFailureList());               
 
                     ts.Complete();
                     return user.Id;

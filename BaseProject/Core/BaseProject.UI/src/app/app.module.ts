@@ -31,7 +31,6 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import {TimeAgoPipe} from 'time-ago-pipe';
-import { SidebarComponent } from './sidebar/sidebar.component';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -67,8 +66,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       LoaderComponent,
       ListUserComponent,
       EditUserComponent,
-      TimeAgoPipe,
-      SidebarComponent
+      TimeAgoPipe
    ],
    imports: [
       BrowserModule,
