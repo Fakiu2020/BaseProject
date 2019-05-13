@@ -48,6 +48,12 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { RolesService } from './_services/roles.service';
 
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+
+
+
 export function tokenGetter() {
    return localStorage.getItem('token');
  }
@@ -73,6 +79,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       HttpClientModule,
       FormsModule,
       AppRoutingModule,
+      MatToolbarModule,
+      MatIconModule,
       AccordionModule.forRoot(),
       BsDropdownModule.forRoot(),
       TooltipModule.forRoot(),
@@ -92,7 +100,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
            whitelistedDomains: ['localhost:52676'],
            blacklistedRoutes: ['localhost:52676/api/auth']
          }
-       })
+       }),
+      BrowserAnimationsModule
    ],
    providers: [
       AuthService,

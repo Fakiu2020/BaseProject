@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary" *ngIf="authService.loggedIn()">
+<!-- <nav class="navbar navbar-expand-md navbar-dark bg-primary" *ngIf="authService.loggedIn()">
   <div class="container">
     <a class="navbar-brand" [routerLink]="['/home']">Base Project</a>
 
@@ -33,4 +33,23 @@
 <div class="container">
   <router-outlet>            
   </router-outlet>
-</div>
+</div> -->
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Base Project</span>
+
+    <span class="example-spacer"></span>
+
+    <a
+      [routerLink]="['/users']">
+      <mat-icon>home</mat-icon>
+      Users
+    </a>
+
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">home</mat-icon> Home
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">person_outline</mat-icon> User
+  </mat-toolbar-row>
+
+</mat-toolbar>
+<router-outlet>            
+</router-outlet>
