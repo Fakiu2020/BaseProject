@@ -26,7 +26,7 @@ export class EditUserComponent implements OnInit {
   
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.user = (data.user);        
+      this.user = (data.user);
       this.createUpdateForm();
       this.getAllRoles();
     });

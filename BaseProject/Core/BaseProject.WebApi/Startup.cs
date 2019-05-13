@@ -48,6 +48,7 @@ namespace BaseProject.WebApi
                 .AddSwagger()
                 .AddCustomServices()
                 .AddResponseCaching()
+                
 
 
 
@@ -65,6 +66,9 @@ namespace BaseProject.WebApi
                 .Configure<ApiBehaviorOptions>(options => {
                     options.SuppressModelStateInvalidFilter = true;
                 });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 
             // MVC
             services

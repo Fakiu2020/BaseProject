@@ -10,7 +10,7 @@ import { Pagination } from '../models/pagination';
 
 @Injectable()
 export class ListUserResolver implements Resolve<User> {
-    pagination=new Pagination();
+    pagination= new Pagination();
     constructor(private userService: UserService, private router: Router,
                 private alertify: AlertifyService, private authService: AuthService) {}
 

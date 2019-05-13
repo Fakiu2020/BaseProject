@@ -2,8 +2,7 @@ export  class Pagination {
     pageNumber: number;
     totalRecords: number;
     pageTotal: number;
-    pageSize: number;
-    
+    pageSize: number;    
 }
 
 export class PaginatedResult<T> {

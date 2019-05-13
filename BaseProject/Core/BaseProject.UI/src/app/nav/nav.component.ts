@@ -10,14 +10,11 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
 
   userLogin: any = {};
-  photoUrl: string;
   constructor(public authService: AuthService, private alertService: AlertifyService,
               private router: Router) { }
 
-  ngOnInit() {
-    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
+  ngOnInit() { 
   }
-
   login() {
     this.authService.login(this.userLogin).subscribe(next => {
       this.alertService.success('Logged in successfully');

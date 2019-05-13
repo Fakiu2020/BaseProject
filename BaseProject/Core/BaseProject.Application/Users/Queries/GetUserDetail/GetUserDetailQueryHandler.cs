@@ -29,22 +29,6 @@ namespace BaseProject.Application.Users.Queries.GetAllUsers
 
         public async Task<UserDetailModel> Handle(GetUserDetailQuery request, CancellationToken cancellationToken)
         {
-
-            //var user = await (from userResult in _context.Users
-            //                   where userResult.Id == request.Id
-            //                   select new
-            //                   {
-            //                       Id = userResult.Id,
-            //                       Email = userResult.Email,
-            //                       FirstName = userResult.FirstName,
-            //                       LastName = userResult.LastName,
-            //                       PhoneNumber=userResult.PhoneNumber,
-            //                       Roles = (from userRole in userResult.Roles
-            //                                join role in _context.Roles
-            //                                on userRole.RoleId equals role.Id
-            //                                select new { role.Name, role.Id }).ToList()
-            //                   }).FirstOrDefaultAsync();
-
             var user = await _context.Users.FindAsync(request.Id);            
             if (user == null)      
                 throw new NotFoundException(nameof(User), request.Id);

@@ -14,24 +14,26 @@ import { User } from 'src/app/models/user';
 })
 export class ListUserComponent implements OnInit {
   users: any [];
-  isLoading:boolean =false;
-  
-  pagination = new Pagination();
-  userToDelete:User;
+  isLoading = false;
 
-  
+  pagination = new Pagination();
+  userToDelete: User;
   config = {
     animated: true
-  }
+  };
 
   modalRef: BsModalRef;
-  constructor(private modalService: BsModalService,private route: ActivatedRoute, private router: Router, private userService: UserService, private alertify: AlertifyService) { }
+  constructor(private modalService: BsModalService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private userService: UserService,
+              private alertify: AlertifyService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.users = data.users.result;  
+      this.users = data.users.result; 
       this.pagination = data.users.pagination;
-    });   
+    });
   }
 
 
@@ -39,14 +41,14 @@ export class ListUserComponent implements OnInit {
     this.router.navigate(['/user/create']);
   }
 
-  getAll() {    
-    this.isLoading=true;
+  getAll() {
+    this.isLoading = true;
     this.userService.getUsers(this.pagination).subscribe((res) => {
-      this.users = res.result;      
-      this.isLoading=false;
+      this.users = res.result;
+      this.isLoading = false;
       this.pagination = res.pagination;
     }, error => {
-      this.isLoading=false;
+      this.isLoading = false;
       this.alertify.error(error);
     });
   }

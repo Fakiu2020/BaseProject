@@ -12,6 +12,7 @@ using BaseProject.Application.Users.Queries.GetAllUsers;
 using BaseProject.Domain;
 using BaseProject.Persistence;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,15 +22,19 @@ namespace BaseProject.Application.Users.Administrators.Queries.GetAdministratorD
     {
         private readonly BaseProjectDbContext _context;
         private readonly IMapper _mapper;
-        public GetUserListQueryHandler(BaseProjectDbContext context, IMapper mapper)
+        private readonly IHttpContextAccessor _httpContextAccesor;
+
+        public GetUserListQueryHandler(BaseProjectDbContext context, IMapper mapper, IHttpContextAccessor httpContextAccesor)
         {
             _context = context;
             _mapper = mapper;
+            _httpContextAccesor = httpContextAccesor;
         }
 
-        public async Task<UserListViewModel> Handle(GetUserListQuery request, CancellationToken cancellationToken)
+        public async Task<UserListViewModel> Handle(GetUserListQuery request,CancellationToken cancellationToken)
         {
-           
+            //var userId = _httpContextAccesor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            
             var data = _context.Users
                                       .OrderByDescending(x => x.CreationTime)
                                       .Where(x => !x.IsDeleted &&

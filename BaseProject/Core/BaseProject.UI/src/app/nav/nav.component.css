@@ -6,3 +6,7 @@
     border: 2px solid white;
     display: inline;
 }
+
+.container {
+    margin-top: 20px;
+}
