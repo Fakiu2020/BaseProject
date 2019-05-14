@@ -13,7 +13,7 @@ namespace BaseProject.Application.Common
         protected FilterBase()
         {
             PageNumber = 1;
-            PageSize = 4;
+            PageSize = 5;
             SortBy = "CreationTime";
             SortDirection = "DESC";
         }

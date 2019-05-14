@@ -49,8 +49,13 @@ import { RolesService } from './_services/roles.service';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
+
+
+
+import {MatToolbarModule, MatExpansionModule, MatIconModule, 
+         MatButtonModule, MatMenuModule, MatCardModule,
+         MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatProgressSpinnerModule} 
+   from '@angular/material';
 
 
 
@@ -79,8 +84,20 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       HttpClientModule,
       FormsModule,
       AppRoutingModule,
+      
+      MatProgressSpinnerModule,
+      MatPaginatorModule,
+      MatTableModule,
+      MatExpansionModule,
+      MatIconModule,
+      MatFormFieldModule,
+      MatCardModule,
+      MatMenuModule,
       MatToolbarModule,
       MatIconModule,
+      MatButtonModule,
+      MatInputModule,
+
       AccordionModule.forRoot(),
       BsDropdownModule.forRoot(),
       TooltipModule.forRoot(),

@@ -9,13 +9,14 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 
-.page-link{
-    background-color: #2C3E50 !important;    
-}
 
-
-.panel-title{
-    cursor: pointer;   
-}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container-fluid{
+    margin-top:1%;
+}
+
+.margin-bottom-20{
+    margin-bottom: 20px;
+}

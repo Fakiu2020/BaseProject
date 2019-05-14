@@ -15,6 +15,8 @@ import { User } from 'src/app/models/user';
 export class ListUserComponent implements OnInit {
   users: any [];
   isLoading = false;
+  panelOpenState = false;
+  displayedColumns: string[] = [ 'firstName', 'lastName' , 'email'];
 
   pagination = new Pagination();
   userToDelete: User;
