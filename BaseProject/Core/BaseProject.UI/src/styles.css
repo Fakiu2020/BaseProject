@@ -20,3 +20,28 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .margin-bottom-20{
     margin-bottom: 20px;
 }
+
+.form{
+    box-shadow: 0 0 34px -2px rgba(139,143,140,.79);
+    margin-right: auto;
+    margin-left: auto;
+    width: 50%;
+}
+
+mat-form-field {
+    display: block;
+    width: 100%;
+}
+
+.btn-large-50{
+    width: 50%;
+}
+
+
+.pointer{
+    cursor: pointer;
+}
+
+.mat-row:hover {
+    background-color:#ede7f6;
+  }

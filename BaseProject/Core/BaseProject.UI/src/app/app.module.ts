@@ -54,7 +54,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatToolbarModule, MatExpansionModule, MatIconModule, 
          MatButtonModule, MatMenuModule, MatCardModule,
-         MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatProgressSpinnerModule} 
+         MatFormFieldModule, MatInputModule, MatTableModule, 
+         MatPaginatorModule, MatProgressSpinnerModule, MatRadioModule } 
    from '@angular/material';
 
 
@@ -85,6 +86,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       FormsModule,
       AppRoutingModule,
       
+      MatRadioModule,
       MatProgressSpinnerModule,
       MatPaginatorModule,
       MatTableModule,

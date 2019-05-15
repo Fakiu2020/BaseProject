@@ -1,25 +1,19 @@
 
-<div class="signin-content">
-    <mat-card>
-      <mat-card-content>
-        <form [formGroup]="loginForm" (ngSubmit)="login()">
-          <p>Sign in</p>
-          <mat-form-field class="full-width-input">
-            <input matInput placeholder="Email" formControlName="email" required>
-            <mat-error *ngIf="loginForm.get('email').errors">
-                Email is required
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field class="full-width-input">
-            <input matInput type="password" placeholder="Password" formControlName="password"  [type]="hide ? 'password' : 'text'" required>
-            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            <mat-error *ngIf="loginForm.get('password').errors">
-                Password is required
-            </mat-error>
+  <form [formGroup]="loginForm" (ngSubmit)="login()"  class="text-center border border-light p-5 form">
+    <p>Sign in</p>
+    <mat-form-field class="full-width-input">
+      <input matInput placeholder="Email" formControlName="email" required>
+      <mat-error *ngIf="loginForm.get('email').errors">
+          Email is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width-input">
+      <input matInput type="password" placeholder="Password" formControlName="password"  [type]="hide ? 'password' : 'text'" required>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-error *ngIf="loginForm.get('password').errors">
+          Password is required
+      </mat-error>
 
-          </mat-form-field>
-          <button mat-raised-button color="primary">Login</button>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="btn-large-50">Login</button>
+  </form>

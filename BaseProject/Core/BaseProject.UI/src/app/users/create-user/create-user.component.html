@@ -1,131 +1,110 @@
-<div class="row justify-content-center">
-  
-    <div class="col-6 align-self-center">
-        <form [formGroup]="createUserForm" (ngSubmit)="createUser()" autocomplete="off">
-  
-            <h2 class="text-center text-primary">Create User</h2>
-            <hr>
-          
-            <div class="form-group">
-              <label class="">First Name</label>
-              <input type="text"               
-                [ngClass]="{'is-invalid': createUserForm.get('firstName').errors 
-                  && createUserForm.get('firstName').touched}"
-                class="form-control" 
-                formControlName="firstName" 
-                placeholder="First Name">
-              <div class="invalid-feedback">Please choose a first name</div>
-            </div>
-          
-            <div class="form-group">
-                <label class="">Last Name</label>
-              <input type="text" 
-                [ngClass]="{'is-invalid': createUserForm.get('lastName').errors 
-                  && createUserForm.get('lastName').touched}"
-                class="form-control" 
-                formControlName="lastName" 
-                placeholder="Last Name">
-              <div class="invalid-feedback">Please choose a last name</div>
-            </div>
-          
-          
-            <div class="form-group">
-                <label class="">Email</label>
-              <input type="email" 
-                autocomplete="off"                
-                [ngClass]="{'is-invalid': createUserForm.get('email').errors 
-                  && createUserForm.get('email').touched}"
-                class="form-control" 
-                formControlName="email" 
-                placeholder="Email">
-               
-                <div class="invalid-feedback" *ngIf="f.email.errors">
-                    <div *ngIf="f.email.errors.required" >
-                      Email is required
-                    </div>
-                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                </div>           
-            </div>
-          
-            <div class="form-group">
-                <label class="">Confirm Email</label>           
-              <input type="email" 
-                autocomplete="off"                                      
-                [ngClass]="{'is-invalid': f.confirmEmail.errors 
-                    && createUserForm.get('confirmEmail').touched
-                    || createUserForm.get('confirmEmail').touched
-                    && f.confirmEmail.hasError('mismatch')}"
-                class="form-control" 
-                formControlName="confirmEmail" 
-                placeholder="Confirm Email">
+<form
+  [formGroup]="createUserForm"
+  (ngSubmit)="save()"
+  class="text-center border border-light p-5 form"
+>
+  <p class="h4 mb-4">Create User</p>
 
-                <div *ngIf="f.confirmEmail.errors" class="invalid-feedback">                      
-                    <div *ngIf="f.confirmEmail.errors.mustMatch">Confirm paassword must match</div>
-                </div>
-               
-    
-            </div>
-                      
-            <div class="form-group">
-                <label class="">Password</label>
-              <input type="password" 
-                [ngClass]="{'is-invalid':f.password.errors 
-                            && createUserForm.get('password').touched}"
-                class="form-control"                 
-                autocomplete="off"  
-                formControlName="password" 
-                placeholder="Password">
+  <mat-form-field class="full-width-input">
+    <input matInput placeholder="First Name" formControlName="firstName" />
+    <mat-error *ngIf="createUserForm.get('firstName').errors">
+      Firstname is required
+    </mat-error>
+  </mat-form-field>
 
+  <mat-form-field class="full-width-input">
+    <input matInput placeholder="Last Name" formControlName="lastName" />
+    <mat-error *ngIf="createUserForm.get('lastName').errors">
+      Lastname is required
+    </mat-error>
+  </mat-form-field>
 
-                <div class="invalid-feedback" 
-                  *ngIf="f.password.hasError('required') 
-                    && createUserForm.get('password').touched">
-                    Password is required
-                </div>
+  <mat-form-field class="full-width-input">
+    <input matInput placeholder="Email" formControlName="email" />
+    <mat-error *ngIf="f.email.errors && f.email.errors.required">
+      Email is required
+    </mat-error>
 
-                <div class="invalid-feedback" 
-                *ngIf="f.password.hasError('minlength') 
-                  && createUserForm.get('password').touched">
-                  Password must be at least 4 characters
-              </div>
-              <div class="invalid-feedback" 
-              *ngIf="f.password.hasError('maxlength') 
-                && createUserForm.get('password').touched">
-                Password cannot exceed 10 characters
-            </div>
-            </div>
-          
-            <div class="form-group">
-              
-                <label class="">Confirm Password</label>
-                <input 
-                  [ngClass]="{'is-invalid': f.confirmPassword.errors 
-                    && createUserForm.get('confirmPassword').touched
-                    || createUserForm.get('confirmPassword').touched
-                    && f.confirmPassword.hasError('mismatch')}"
-                  type="password" 
-                  class="form-control" 
-                  formControlName="confirmPassword" 
-                  placeholder="Confirm Password">
+    <mat-error *ngIf="f.email.errors && f.email.errors.email">
+      Email must be a valid email address
+    </mat-error>
+  </mat-form-field>
 
-                  <div *ngIf="f.confirmPassword.errors" class="invalid-feedback">                      
-                      <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
-                  </div>                  
-              </div>
+  <mat-form-field class="full-width-input">
+    <input
+      matInput
+      placeholder="Confirm Email"
+      formControlName="confirmEmail"
+    />
+    <mat-error
+      *ngIf="
+        createUserForm.get('confirmEmail').errors &&
+        f.confirmEmail.errors.mustMatch
+      "
+    >
+      Confirm paassword must match
+    </mat-error>
+  </mat-form-field>
 
-              <div class="form-check" *ngFor="let role of roles">
-                <input type="checkbox" class="form-check-input" (change)="rolChecked(role)" [checked]=role.checked>
-                <label>{{role.name}}</label>
-              </div>
-          
-            <div class="form-group">
-              <button class="btn btn-info mr-2" [disabled]="!createUserForm.valid" type="submit">Create</button>
-              <button class="btn btn-secondary" type="button" (click)="cancel()">Cancel</button>
-            </div>
-          </form>
+  <mat-form-field class="full-width-input">
+    <input
+      matInput
+      placeholder="Password"
+      formControlName="password"
+      type="password"
+    />
+
+    <mat-error *ngIf="f.password.errors && f.password.errors.required">
+      Password is required
+    </mat-error>
+
+    <mat-error *ngIf="f.password.hasError('minlength')">
+      Password must be at least 4 characters
+    </mat-error>
+
+    <mat-error *ngIf="f.password.hasError('maxlength')">
+      Password cannot exceed 10 characters
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width-input">
+    <input
+      matInput
+      placeholder="Confirm Password"
+      type="password"
+      formControlName="confirmPassword"
+    />
+    <mat-error
+      *ngIf="f.confirmPassword.errors && f.confirmPassword.errors.mustMatch"
+    >
+      Passwords must match
+    </mat-error>
+  </mat-form-field>
+
+  <div class="radio-roles">
+      <label>Roles: </label>
+      <mat-radio-group formControlName="roles">
+        <mat-radio-button value="role.name" *ngFor="let role of roles">{{role.name}}</mat-radio-button>
+      </mat-radio-group>
     </div>
-</div>
 
-
-
-
+  <div >
+    <button
+      mat-raised-button
+      color="primary"
+      class="btn-large-50"
+      type="submit"
+    >
+      Save
+    </button>
+    <button
+      mat-raised-button
+      color=""
+      class="btn-large-50"
+      type="button"
+      (click)="cancel()"
+    >
+      Cancel
+    </button>
+  </div>
+</form>

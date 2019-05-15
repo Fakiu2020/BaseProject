@@ -15,15 +15,15 @@ import { RolesService } from 'src/app/_services/roles.service';
   styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent implements OnInit {
-  roles:any = [];
-  rolesSelected:any=[];
+  roles: any = [];
+  rolesSelected: any = [];
 
   userRegister: any = {};
   createUserForm: FormGroup;
 
-  constructor(private authService: AuthService,  
+  constructor(private authService: AuthService,
               private router: Router,
-              private rolesService: RolesService, 
+              private rolesService: RolesService,
               private alertService: AlertifyService, private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -38,9 +38,9 @@ export class CreateUserComponent implements OnInit {
         lastName: ['', Validators.required],
         email: ['',  [Validators.required, Validators.email]],
         confirmEmail: [''],
-        password: ['', [Validators.required, Validators.minLength(8),Validators.maxLength(10)] ],
+        password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(10)] ],
         confirmPassword: [''],
-        roles:[this.rolesSelected]
+        roles: [this.rolesSelected]
       },
       {
         validator: [ MustMatch('password', 'confirmPassword'), MustMatch('email', 'confirmEmail')  ]
@@ -51,15 +51,15 @@ export class CreateUserComponent implements OnInit {
   get f() { return this.createUserForm.controls; }
 
 
-  createUser() {
-     if (this.createUserForm.invalid) {return;}
+  save() {
+     if (this.createUserForm.invalid) {return; }
      this.userRegister = Object.assign({}, this.createUserForm.value);
      this.authService.register(this.userRegister).subscribe(() => {
-        this.alertService.success('Registration successful');        
+        this.alertService.success('Registration successful');
       }, error => {
         this.alertService.error(error);
-      }, () => {       
-          this.router.navigate(['/users']);       
+      }, () => {
+          this.router.navigate(['/users']);
       });
   }
 
@@ -67,21 +67,21 @@ export class CreateUserComponent implements OnInit {
     this.router.navigate(['/users']);
   }
 
-  getAllRoles(){
-    this.rolesService.getAllRoles().subscribe( data=>{
-     this.roles=data.roles;      
-    }, error=>{
+  getAllRoles() {
+    this.rolesService.getAllRoles().subscribe( data => {
+     this.roles = data.roles;
+    }, error => {
       this.alertService.error(error);
-    })
+    });
   }
 
-  rolChecked(rol){    
-    rol.checked=!rol.checked;
-    if(rol.checked){
+  rolChecked(rol) {
+    rol.checked = !rol.checked;
+    if (rol.checked) {
        this.rolesSelected.push(rol.name);
        return;
     }
-      const index=this.rolesSelected.indexOf(rol)
-      this.rolesSelected.splice(index, 1);
+    const index = this.rolesSelected.indexOf(rol);
+    this.rolesSelected.splice(index, 1);
     }
 }
