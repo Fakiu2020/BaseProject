@@ -54,6 +54,7 @@ export class CreateUserComponent implements OnInit {
   save() {
      if (this.createUserForm.invalid) {return; }
      this.userRegister = Object.assign({}, this.createUserForm.value);
+     this.userRegister.roles=this.rolesSelected;
      this.authService.register(this.userRegister).subscribe(() => {
         this.alertService.success('Registration successful');
       }, error => {
