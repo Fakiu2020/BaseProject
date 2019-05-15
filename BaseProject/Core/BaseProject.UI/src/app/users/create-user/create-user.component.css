@@ -8,3 +8,12 @@
   .radio-roles{
       margin: 0px;
   }
+
+
+  mat-radio-group{
+    margin-left: 20px;
+  }
+
+  mat-radio-button{
+    margin-left: 10px;
+  }
