@@ -6,6 +6,9 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Pagination } from 'src/app/models/pagination';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { User } from 'src/app/models/user';
+import { MatDialog } from '@angular/material';
+import { EditUserComponent } from '../edit-user/edit-user.component';
+import { ModalService } from 'src/app/_services/modal.service';
 
 @Component({
   selector: 'app-user-list',
@@ -15,21 +18,17 @@ import { User } from 'src/app/models/user';
 export class ListUserComponent implements OnInit {
   users: any [];
   isLoading = false;
-  panelOpenState = false;
-  displayedColumns: string[] = [ 'firstName', 'lastName' , 'email'];
 
+  displayedColumns: string[] = [ 'firstName', 'lastName' , 'email','actions'];
   pagination = new Pagination();
-  userToDelete: User;
-  config = {
-    animated: true
-  };
+
 
   modalRef: BsModalRef;
-  constructor(private modalService: BsModalService,
-              private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private router: Router,
               private userService: UserService,
-              private alertify: AlertifyService) { }
+              private alertify: AlertifyService,
+              public dialogService: ModalService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -64,24 +63,17 @@ export class ListUserComponent implements OnInit {
    this.router.navigate(['/user/edit', userSelected.id]);
   }
 
-
-  removeConfirm(user,template: TemplateRef<any>){
-    this.userToDelete=user;
-    this.modalRef = this.modalService.show(template, this.config);
-    
-  }
-
-  confirm(): void {    
-    this.userService.deleteUser(this.userToDelete.id).subscribe(()=>{
-      this.getAll();
-      this.modalRef.hide();
-      this.alertify.success("User deleted successfully");
-    }, error => {
-      this.alertify.error(error);
-    });    
-  }
- 
-  decline(): void {    
-    this.modalRef.hide();
+  delete(userSelected): void {
+    this.dialogService.openConfirmDialog('Are you sure to delete this user ?')
+    .afterClosed().subscribe(res =>{
+      if(res){
+        this.userService.deleteUser(userSelected.id).subscribe(()=>{
+          this.getAll();     
+          this.alertify.success("User deleted successfully");
+        }, error => {
+          this.alertify.error(error);
+        });         
+      }
+    });
   }
 }

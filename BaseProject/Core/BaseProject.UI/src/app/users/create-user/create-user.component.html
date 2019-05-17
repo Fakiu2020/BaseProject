@@ -81,11 +81,11 @@
     </mat-error>
   </mat-form-field>
 
-  <div class="radio-roles">
+  <div class="radio-roles text-left">
       <label>Roles: </label>
-      <mat-radio-group formControlName="roles">
-          <mat-radio-button (change)="rolChecked(role)" [checked]=role.checked value="role.name" *ngFor="let role of roles">{{role.name}}</mat-radio-button>
-      </mat-radio-group>
+      <mat-checkbox formControlName="roles" [(ngModel)]=role.checked value="role.name" *ngFor="let role of roles">
+          {{role.name}}
+      </mat-checkbox>
     </div>
 
   <div >

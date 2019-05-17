@@ -55,8 +55,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule, MatExpansionModule, MatIconModule, 
          MatButtonModule, MatMenuModule, MatCardModule,
          MatFormFieldModule, MatInputModule, MatTableModule, 
-         MatPaginatorModule, MatProgressSpinnerModule, MatRadioModule } 
+         MatPaginatorModule, MatProgressSpinnerModule, MatRadioModule,
+         MatCheckboxModule,MatDialogModule } 
    from '@angular/material';
+import { ModalConfirmComponent } from './_helpers/modal-confirm/modal-confirm.component';
 
 
 
@@ -78,7 +80,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       LoaderComponent,
       ListUserComponent,
       EditUserComponent,
-      TimeAgoPipe
+      TimeAgoPipe,
+      ModalConfirmComponent
    ],
    imports: [
       BrowserModule,
@@ -87,6 +90,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       AppRoutingModule,
       
       MatRadioModule,
+      MatDialogModule,
+      MatCheckboxModule,
       MatProgressSpinnerModule,
       MatPaginatorModule,
       MatTableModule,
@@ -120,7 +125,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
            blacklistedRoutes: ['localhost:52676/api/auth']
          }
        }),
-      BrowserAnimationsModule
+      BrowserAnimationsModule,
+     
    ],
    providers: [
       AuthService,
@@ -139,6 +145,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
          useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
        }
    ],
+   entryComponents:[ListUserComponent,ModalConfirmComponent],
    bootstrap: [
       AppComponent
    ]

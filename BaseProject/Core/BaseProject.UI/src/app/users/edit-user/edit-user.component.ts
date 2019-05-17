@@ -14,16 +14,15 @@ import { elementEnd } from '@angular/core/src/render3';
 })
 export class EditUserComponent implements OnInit {
   updateUserForm: FormGroup;
-  user: any = {};
+  user: User ;
   roles:any=[];
-  isUser: number;
 
   constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
               private userService: UserService, private alertService: AlertifyService,
-              private rolesSerice:RolesService) { }
+              private rolesSerice:RolesService) {}
 
   
-  
+ 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.user = (data.user);
@@ -40,7 +39,8 @@ export class EditUserComponent implements OnInit {
         email: [this.user.email, [Validators.required, Validators.email]],
         firstName: [this.user.firstName, Validators.required],
         lastName: [this.user.lastName, Validators.required],
-        phoneNumber: [this.user.phoneNumber]        
+        phoneNumber: [this.user.phoneNumber] ,        
+        roles: [this.user.roles]       
       }
     );
   }
@@ -49,8 +49,7 @@ export class EditUserComponent implements OnInit {
   updateUser() {
     if (this.updateUserForm.invalid) { return; }
     this.user = Object.assign({}, this.updateUserForm.value);
-    this.user.roles = this.getRolesSelected();
-    this.getRolesSelected();
+    this.user.roles = this.getRolesSelected();   
     this.userService.updateUser(this.user).subscribe(next => {
     }, error => {
       this.alertService.error(error);
@@ -58,6 +57,7 @@ export class EditUserComponent implements OnInit {
       this.alertService.success('Modified Successfully');
     });
   }
+
   getRolesSelected(){
     const result = [];
     this.roles.forEach((value, key: string) => {
@@ -91,5 +91,6 @@ export class EditUserComponent implements OnInit {
         }   
     }    
   }
+  
 
   }

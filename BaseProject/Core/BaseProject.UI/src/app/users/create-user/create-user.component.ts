@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { MustMatch } from 'src/app/_helpers/must-match';
 import { RolesService } from 'src/app/_services/roles.service';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -18,15 +19,17 @@ export class CreateUserComponent implements OnInit {
   roles: any = [];
   rolesSelected: any = [];
 
-  userRegister: any = {};
+  userRegister: User;
   createUserForm: FormGroup;
 
   constructor(private authService: AuthService,
               private router: Router,
               private rolesService: RolesService,
-              private alertService: AlertifyService, private fb: FormBuilder) { }
+              private alertService: AlertifyService, private fb: FormBuilder) {this.userRegister=new User() }
 
   ngOnInit() {
+    
+    console.log(this.userRegister);
      this.createRegisterForm();
      this.getAllRoles();
   }
@@ -40,7 +43,7 @@ export class CreateUserComponent implements OnInit {
         confirmEmail: [''],
         password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(10)] ],
         confirmPassword: [''],
-        roles: [this.rolesSelected]
+        roles: [this.userRegister.roles]
       },
       {
         validator: [ MustMatch('password', 'confirmPassword'), MustMatch('email', 'confirmEmail')  ]
@@ -52,9 +55,12 @@ export class CreateUserComponent implements OnInit {
 
 
   save() {
+  
+
      if (this.createUserForm.invalid) {return; }
+     
      this.userRegister = Object.assign({}, this.createUserForm.value);
-     this.userRegister.roles=this.rolesSelected;
+     this.userRegister.roles=this.getRolesSelected();
      this.authService.register(this.userRegister).subscribe(() => {
         this.alertService.success('Registration successful');
       }, error => {
@@ -76,13 +82,14 @@ export class CreateUserComponent implements OnInit {
     });
   }
 
-  rolChecked(rol) {
-    rol.checked = !rol.checked;
-    if (rol.checked) {
-       this.rolesSelected.push(rol.name);
-       return;
-    }
-    const index = this.rolesSelected.indexOf(rol);
-    this.rolesSelected.splice(index, 1);
-    }
+  getRolesSelected(){
+    const result = [];
+    this.roles.forEach((value, key: string) => {
+        if (value.checked === true){
+          result.push(value.name);
+        }
+    });
+    return result;
+  }
+
 }

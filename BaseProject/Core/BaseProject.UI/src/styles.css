@@ -45,3 +45,15 @@ mat-form-field {
 .mat-row:hover {
     background-color:#ede7f6;
   }
+
+  .radio-roles{
+    margin: 0px;
+}
+
+
+  mat-checkbox{
+    margin-left: 10px;
+  }
+
+  
+  

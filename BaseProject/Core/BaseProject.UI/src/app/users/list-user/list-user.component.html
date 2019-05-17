@@ -32,24 +32,49 @@
       <!--First Name Column -->
       <ng-container matColumnDef="firstName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
-          <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
-        </ng-container>
+          <td mat-cell *matCellDef="let row" (click)="goToEdit(row)"> {{row.firstName}} </td>
+      </ng-container>
 
           <!--Last Name Column -->
       <ng-container matColumnDef="lastName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
-          <td mat-cell *matCellDef="let row"> {{row.lastName}} </td>
+          <td mat-cell *matCellDef="let row" (click)="goToEdit(row)"> {{row.lastName}} </td>
         </ng-container>
 
       <!-- Email Column -->
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+        <td mat-cell *matCellDef="let row" (click)="goToEdit(row)"> {{row.email}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+
+        <td mat-cell *matCellDef="let row">
+          <!-- <button mat-icon-button ><mat-icon>edit</mat-icon></button> -->
+          <button mat-icon-button color="warn" (click)="delete(row)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      
+      <!-- <ng-container matColumnDef="loading">
+          <mat-footer-cell *matFooterCellDef colspan="12">
+            Loading data...
+          </mat-footer-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef colspan="12">
+            No data.
+          </mat-footer-cell>
+        </ng-container> -->
+
      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr  class="pointer" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goToEdit(row)"></tr> 
-    
+     <tr  class="pointer" mat-row *matRowDef="let row; columns: displayedColumns;"></tr> 
+     
+     <!-- <mat-footer-row *matFooterRowDef="['loading']"  ></mat-footer-row>
+     <mat-footer-row *matFooterRowDef="['noData']"  ></mat-footer-row> -->
     </table>
   
     <mat-paginator #paginator

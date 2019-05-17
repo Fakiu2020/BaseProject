@@ -1,81 +1,56 @@
 
- <div class="row justify-content-center">
-  <div class="col-6 align-self-center">
-    <form [formGroup]="updateUserForm" (ngSubmit)="updateUser()">
-      <h2 class="text-center text-primary">Edit User</h2>
-      <hr />
+<form [formGroup]="updateUserForm" (ngSubmit)="updateUser()"  class="text-center border border-light p-5 form">
+    <p class="h4 mb-4">Edit User</p>
 
-      <div class="form-group">
-        <label class="">Email</label>
-        <input
-          type="text"      
-          [ngClass]="{'is-invalid': updateUserForm.get('email').errors 
-          && updateUserForm.get('email').touched}"
-          class="form-control"
-          formControlName="email"
-          placeholder="Email"
-        />
-       
-        <div class="invalid-feedback" *ngIf="updateUserForm.get('email').errors">            
-            <div *ngIf="f.email.errors.required">Email is required</div>
-            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+    <mat-form-field class="full-width-input">
+        <input matInput placeholder="First Name" formControlName="firstName" />
+        <mat-error *ngIf="updateUserForm.get('firstName').errors">Firstname is required</mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="full-width-input">
+        <input matInput placeholder="Last Name" formControlName="lastName" />
+        <mat-error *ngIf="updateUserForm.get('lastName').errors">lastName is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width-input">
+        <input matInput placeholder="Email" formControlName="email" />
+        <mat-error *ngIf="f.email.errors && f.email.errors.required">
+          Email is required
+        </mat-error>
+    
+        <mat-error *ngIf="f.email.errors && f.email.errors.email">
+          Email must be a valid email address
+        </mat-error>
+      </mat-form-field>
+
+      <div class="radio-roles text-left" >
+          <label>Roles: </label>        
+          <mat-checkbox formControlName="roles" [(ngModel)]=role.checked value="role.name" *ngFor="let role of roles">
+              {{role.name}}
+          </mat-checkbox>
+      </div>
+
+
+
+      <div >
+          <button
+            mat-raised-button
+            color="primary"
+            class="btn-large-50"
+            type="submit"
+          >
+            Save
+          </button>
+          <button
+            mat-raised-button
+            color=""
+            class="btn-large-50"
+            type="button"
+            (click)="cancel()"
+          >
+            Cancel
+          </button>
         </div>
 
-      </div>
-
-      <div class="form-group">
-          <label class="">First Name</label>
-          <input     
-            type="text"          
-            class="form-control"
-            formControlName="firstName"
-            placeholder="First Name"
-          />
-        </div>
-
-        <div class="form-group">
-            <label class="">Last Name</label>
-            <input     
-              type="text"          
-              class="form-control"
-              formControlName="lastName"
-              placeholder="Last Name"
-            />
-          </div>
-
-      <div class="form-group">
-        <label class="">Phone Number</label>
-        <input     
-          type="text"          
-          class="form-control"
-          formControlName="phoneNumber"
-          placeholder="Phone Number"
-        />
-      </div>
-
-  
-      <div class="form-check" *ngFor="let role of roles">
-        <input type="checkbox" class="form-check-input" 
-              (change)="role.checked=!role.checked" 
-              [checked]=role.checked
-              >
-        <label>{{role.name}} </label>
-      </div>
-
-      <div class="form-group">
-        <button
-          class="btn btn-success mr-2"
-          [disabled]="!updateUserForm.valid"
-          type="submit"
-        >
-          Save
-        </button>
-        <button class="btn btn-secondary" type="button" (click)="cancel()">
-          Cancel
-        </button>
-      </div>
-
-      
-    </form>
-  </div>
-</div> 
+</form>

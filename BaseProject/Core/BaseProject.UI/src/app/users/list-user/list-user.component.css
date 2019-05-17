@@ -8,6 +8,9 @@ table {
 }
   
 td, th {
-    width: 25%;
+    width: 30%;
 }
 
+.hide{
+  font-size: 100px
+}
