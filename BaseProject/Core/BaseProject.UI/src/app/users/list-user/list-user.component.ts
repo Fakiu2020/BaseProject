@@ -3,12 +3,9 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { Pagination } from 'src/app/models/pagination';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { User } from 'src/app/models/user';
-import { MatDialog } from '@angular/material';
-import { EditUserComponent } from '../edit-user/edit-user.component';
+import { BsModalRef } from 'ngx-bootstrap';
 import { ModalService } from 'src/app/_services/modal.service';
+import { UserFilter } from 'src/app/models/UserFilters';
 
 @Component({
   selector: 'app-user-list',
@@ -20,7 +17,7 @@ export class ListUserComponent implements OnInit {
   isLoading = false;
 
   displayedColumns: string[] = [ 'firstName', 'lastName' , 'email','actions'];
-  pagination = new Pagination();
+  filters = new UserFilter();
 
 
   modalRef: BsModalRef;
@@ -32,8 +29,8 @@ export class ListUserComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.users = data.users.result; 
-      this.pagination = data.users.pagination;
+      this.users = data.users.entity;
+      this.filters = data.users.filters;
     });
   }
 
@@ -44,10 +41,10 @@ export class ListUserComponent implements OnInit {
 
   getAll() {
     this.isLoading = true;
-    this.userService.getUsers(this.pagination).subscribe((res) => {
-      this.users = res.result;
+    this.userService.getUsers(this.filters).subscribe((res) => {
+      this.users = res.entity;
       this.isLoading = false;
-      this.pagination = res.pagination;
+      // this.filters = (res.filters);
     }, error => {
       this.isLoading = false;
       this.alertify.error(error);
@@ -55,7 +52,7 @@ export class ListUserComponent implements OnInit {
   }
 
   pageChanged(event: any): void {
-    this.pagination.pageNumber = event.page;
+    this.filters.pageNumber = event.page;
     this.getAll();
   }
 
@@ -75,5 +72,9 @@ export class ListUserComponent implements OnInit {
         });         
       }
     });
+  }
+
+  clearFilters(){
+    this.filters.email = '';
   }
 }

@@ -1,12 +1,16 @@
-export  class Pagination {
+export  class FilterBase {
     pageNumber: number;
     totalRecords: number;
     pageTotal: number;
-    pageSize: number;    
+    pageSize: number;
 }
 
-export class PaginatedResult<T> {
-    result: T;
-    pagination: Pagination;
-    
+export class PagedResult<T> {
+    entity: T;
+    filters: FilterBase;
+
+    constructor(){
+        this.filters = new FilterBase();
+    }
 }
+

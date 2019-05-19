@@ -7,7 +7,9 @@
 </div>
   
 <div class="margin-bottom-20 ">
-    <mat-accordion >
+  <form (ngSubmit)="getAll()">
+    
+    <mat-accordion>
         <mat-expansion-panel (opened)="panelOpenState = true"
                              (closed)="panelOpenState = false">
           <mat-expansion-panel-header >
@@ -18,11 +20,21 @@
           </mat-expansion-panel-header>
           
           <mat-form-field>
-              <input matInput placeholder="Email">
+              <input matInput placeholder="Email" [(ngModel)]="this.filters.email" name="email">
           </mat-form-field>
-    
+          <button mat-raised-button color="primary" class="margin-right-10" type="submit">
+            <mat-icon aria-label="Example icon-button with a heart icon">search</mat-icon>
+              Search
+          </button>
+
+          <button mat-raised-button  (click)="clearFilters()">
+            <mat-icon aria-label="Example icon-button with a heart icon">clear</mat-icon>
+              Clear
+          </button>
+
         </mat-expansion-panel>
     </mat-accordion>
+  </form>
 </div>
 
 
@@ -78,11 +90,11 @@
     </table>
   
     <mat-paginator #paginator
-    [length]="pagination.totalRecords"
-    
-    [pageSize]="pagination.pageSize"
-    showFirstLastButtons
-    [pageSizeOptions]="[5,25, 50, 100, 250]">
-    <!-- [pageIndex]="pagination.pageNumber -->
-</mat-paginator>
+        [length]="filters.totalRecords"
+        
+        [pageSize]="filters.pageSize"
+        showFirstLastButtons
+        [pageSizeOptions]="[5,25, 50, 100, 250]">
+      <!-- [pageIndex]="pagination.pageNumber -->
+    </mat-paginator>
 </div>

@@ -21,6 +21,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin-bottom: 20px;
 }
 
+
 .form{
     box-shadow: 0 0 34px -2px rgba(139,143,140,.79);
     margin-right: auto;
@@ -44,16 +45,19 @@ mat-form-field {
 
 .mat-row:hover {
     background-color:#ede7f6;
-  }
+}
 
-  .radio-roles{
+.radio-roles{
     margin: 0px;
 }
 
 
-  mat-checkbox{
+mat-checkbox{
     margin-left: 10px;
-  }
+}
 
   
-  
+.margin-right-10{
+    margin-right: 10px !important;
+}
+

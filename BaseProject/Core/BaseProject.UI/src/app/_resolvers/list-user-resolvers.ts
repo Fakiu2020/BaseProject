@@ -6,17 +6,17 @@ import { AlertifyService } from '../_services/alertify.service';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../_services/auth.service';
-import { Pagination } from '../models/pagination';
+import { UserFilter } from '../models/UserFilters';
 
 @Injectable()
 export class ListUserResolver implements Resolve<User> {
-    pagination= new Pagination();
+    pagination = new UserFilter();
     constructor(private userService: UserService, private router: Router,
                 private alertify: AlertifyService, private authService: AuthService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<User> {
-        this.pagination.pageNumber=1;
-        this.pagination.pageSize=5;
+        this.pagination.pageNumber = 1;
+        this.pagination.pageSize = 5;
         return this.userService.getUsers(this.pagination).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving your data');
