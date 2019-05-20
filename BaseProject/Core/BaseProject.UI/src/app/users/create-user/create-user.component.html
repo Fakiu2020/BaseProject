@@ -6,21 +6,30 @@
   <p class="h4 mb-4">Create User</p>
 
   <mat-form-field class="full-width-input">
-    <input matInput placeholder="First Name" formControlName="firstName" />
-    <mat-error *ngIf="createUserForm.get('firstName').errors">
+    <input matInput 
+           placeholder="First Name" 
+           
+           [value]="createUserForm.get('firstName').value | titlecase"
+
+           formControlName="firstName" />
+    
+           <mat-error *ngIf="createUserForm.get('firstName').errors">
       Firstname is required
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width-input">
-    <input matInput placeholder="Last Name" formControlName="lastName" />
+    <input matInput placeholder="Last Name" 
+           [value]="createUserForm.get('lastName').value | titlecase"
+           formControlName="lastName" />
+
     <mat-error *ngIf="createUserForm.get('lastName').errors">
       Lastname is required
     </mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width-input">
-    <input matInput placeholder="Email" formControlName="email" />
+    <input matInput placeholder="Email" formControlName="email"  />
     <mat-error *ngIf="f.email.errors && f.email.errors.required">
       Email is required
     </mat-error>

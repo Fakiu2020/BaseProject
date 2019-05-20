@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
@@ -12,14 +12,14 @@ import { elementEnd } from '@angular/core/src/render3';
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.css']
 })
-export class EditUserComponent implements OnInit {
+export class EditUserComponent implements OnInit, AfterViewInit {
   updateUserForm: FormGroup;
   user: User ;
-  roles:any=[];
+  roles: any = [];
 
   constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
               private userService: UserService, private alertService: AlertifyService,
-              private rolesSerice:RolesService) {}
+              private rolesSerice: RolesService) {}
 
   
  
@@ -27,8 +27,11 @@ export class EditUserComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.user = (data.user);
       this.createUpdateForm();
-      this.getAllRoles();
+     
     });
+  }
+  ngAfterViewInit(){
+    this.getAllRoles(); 
   }
 
 
@@ -39,8 +42,8 @@ export class EditUserComponent implements OnInit {
         email: [this.user.email, [Validators.required, Validators.email]],
         firstName: [this.user.firstName, Validators.required],
         lastName: [this.user.lastName, Validators.required],
-        phoneNumber: [this.user.phoneNumber] ,        
-        roles: [this.user.roles]       
+        phoneNumber: [this.user.phoneNumber],
+        roles: [this.user.roles]
       }
     );
   }
@@ -49,7 +52,7 @@ export class EditUserComponent implements OnInit {
   updateUser() {
     if (this.updateUserForm.invalid) { return; }
     this.user = Object.assign({}, this.updateUserForm.value);
-    this.user.roles = this.getRolesSelected();   
+    this.user.roles = this.getRolesSelected();
     this.userService.updateUser(this.user).subscribe(next => {
     }, error => {
       this.alertService.error(error);
@@ -69,10 +72,10 @@ export class EditUserComponent implements OnInit {
   }
 
   getAllRoles(){
-    this.rolesSerice.getAllRoles().subscribe( data=>{
-     this.roles=data.roles; 
-     this.matchRoles();  
-    }, error=>{
+    this.rolesSerice.getAllRoles().subscribe( data =>  {
+     this.roles = data.roles;
+     this.matchRoles();
+    }, error => {
       this.alertService.error(error);
     })
   }
@@ -81,16 +84,17 @@ export class EditUserComponent implements OnInit {
     this.router.navigate(['/users']);
   }
 
-  matchRoles(){    
-    for (let i = 0; i < this.user.roles.length; i++) {        
-        for(let j=0; j< this.roles.length;j++){
-           if(this.user.roles[i]==this.roles[j].name){
-              this.roles[j].checked=true;
-              break;              
-           } 
-        }   
-    }    
+  matchRoles(){
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.user.roles.length; i++) {
+        // tslint:disable-next-line:prefer-for-of
+        for (let j = 0; j < this.roles.length;j++){
+           if (this.user.roles[i] === this.roles[j].name){
+              this.roles[j].checked = true;
+              break;
+           }
+        }
+    }
   }
-  
 
-  }
+}

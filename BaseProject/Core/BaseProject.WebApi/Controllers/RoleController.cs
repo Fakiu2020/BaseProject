@@ -2,6 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using BaseProject.Application.Roles;
+using BaseProject.Application.Roles.GetAllRoles;
 using BaseProject.Application.Users.Commands.UpdateUser;
 using BaseProject.Application.Users.Queries.GetAllUsers;
 using BaseProject.WebApi.Common;
@@ -25,8 +26,6 @@ namespace BaseProject.WebApi.Controller
         {
             return Ok(await Mediator.Send(query));
         }
-
-       
 
     }
 }

@@ -1,0 +1,41 @@
+<mat-sidenav-container>
+
+    <mat-sidenav #sidenav mode="over">
+  
+      <mat-toolbar>
+        <mat-toolbar-row>
+          <h2 class="toolbar-title"> Base Project </h2>
+        </mat-toolbar-row>
+      </mat-toolbar>
+  
+      <mat-nav-list>
+  
+        <h2 matSubheader> My Work </h2>
+  
+        <a mat-list-item routerLink="/" style="height: 0;"></a>
+        
+        <a
+          mat-list-item
+          (click)="sidenav.close()"
+          [routerLink]="['/users']"
+          routerLinkActive="list-item-active">    
+          <mat-icon  matListIcon class="app-nav-list-icon">person_outline</mat-icon>
+          Usuarios
+        </a>
+        <mat-divider></mat-divider>
+        <h2 matSubheader> Customer </h2>
+        
+      </mat-nav-list>
+  
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <app-navbar *ngIf="authService.loggedIn()" (toggleSidenav)="sidenav.toggle()"></app-navbar>  
+      
+      <div class="container-fluid">
+          <router-outlet></router-outlet>
+      </div>
+      
+    </mat-sidenav-content>
+    
+  </mat-sidenav-container>

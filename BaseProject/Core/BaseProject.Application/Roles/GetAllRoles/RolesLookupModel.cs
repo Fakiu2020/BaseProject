@@ -3,7 +3,7 @@ using BaseProject.Application.Roles;
 using BaseProject.Domain;
 using Whoever.Common.Mapping;
 
-namespace BaseProject.Application.Roles
+namespace BaseProject.Application.Roles.GetAllRoles
 {
     public class RolesLookupModel
     {

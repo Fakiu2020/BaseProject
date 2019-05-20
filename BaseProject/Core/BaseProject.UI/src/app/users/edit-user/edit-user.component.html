@@ -3,13 +3,16 @@
     <p class="h4 mb-4">Edit User</p>
 
     <mat-form-field class="full-width-input">
-        <input matInput placeholder="First Name" formControlName="firstName" />
+        <input matInput placeholder="First Name" 
+              formControlName="firstName"
+              [value]="updateUserForm.get('firstName').value | titlecase" />
         <mat-error *ngIf="updateUserForm.get('firstName').errors">Firstname is required</mat-error>
     </mat-form-field>
 
 
     <mat-form-field class="full-width-input">
-        <input matInput placeholder="Last Name" formControlName="lastName" />
+        <input matInput placeholder="Last Name" formControlName="lastName" 
+              [value]="updateUserForm.get('lastName').value | titlecase"/>
         <mat-error *ngIf="updateUserForm.get('lastName').errors">lastName is required</mat-error>
     </mat-form-field>
 
@@ -30,9 +33,6 @@
               {{role.name}}
           </mat-checkbox>
       </div>
-
-
-
       <div >
           <button
             mat-raised-button
@@ -43,8 +43,7 @@
             Save
           </button>
           <button
-            mat-raised-button
-            color=""
+            mat-raised-button            
             class="btn-large-50"
             type="button"
             (click)="cancel()"

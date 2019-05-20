@@ -1,0 +1,20 @@
+<mat-toolbar color="primary" class="crm-navigation-bar" *ngIf="authService.loggedIn()" >
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="toggleSidenav.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="toolbar-title"> Base Project </span>
+
+    <button mat-icon-button [matMenuTriggerFor]="auth">
+      <mat-icon>person_outline</mat-icon>
+      <span class="">{{ authService.decodedToken?.sub | titlecase }} </span>
+    </button>
+    <mat-menu #auth="matMenu">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Sign out</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>

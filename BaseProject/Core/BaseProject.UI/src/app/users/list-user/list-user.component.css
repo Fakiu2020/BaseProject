@@ -14,3 +14,11 @@ td, th {
 .hide{
   font-size: 100px
 }
+
+
+.title-grid{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

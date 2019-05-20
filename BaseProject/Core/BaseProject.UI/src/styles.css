@@ -13,14 +13,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.container-fluid{
-    margin-top:1%;
-}
 
 .margin-bottom-20{
     margin-bottom: 20px;
 }
-
 
 .form{
     box-shadow: 0 0 34px -2px rgba(139,143,140,.79);

@@ -1,8 +1,11 @@
 
+
+<div class="title-grid"><h1 class=""> Usuarios </h1></div>
+
 <div class="example-button-row margin-bottom-20">   
     <button mat-raised-button color="primary" (click)="createUser()">
         <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-      Create
+      Crear
     </button>
 </div>
   
@@ -39,22 +42,23 @@
 
 
 <div class="mat-elevation-z8 ">
-    <table mat-table [dataSource]="users" matSort>
+    <table mat-table [dataSource]="dataSource" matSort>
   
       <!--First Name Column -->
-      <ng-container matColumnDef="firstName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+      <ng-container matColumnDef="firstName" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th> 
+          
           <td mat-cell *matCellDef="let row" (click)="goToEdit(row)"> {{row.firstName}} </td>
       </ng-container>
 
           <!--Last Name Column -->
-      <ng-container matColumnDef="lastName">
+      <ng-container matColumnDef="lastName" >
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
           <td mat-cell *matCellDef="let row" (click)="goToEdit(row)"> {{row.lastName}} </td>
         </ng-container>
 
       <!-- Email Column -->
-      <ng-container matColumnDef="email">
+      <ng-container matColumnDef="email" >
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
         <td mat-cell *matCellDef="let row" (click)="goToEdit(row)"> {{row.email}} </td>
       </ng-container>
@@ -88,11 +92,13 @@
      <!-- <mat-footer-row *matFooterRowDef="['loading']"  ></mat-footer-row>
      <mat-footer-row *matFooterRowDef="['noData']"  ></mat-footer-row> -->
     </table>
-  
+    
+ 
+
     <mat-paginator #paginator
         [length]="filters.totalRecords"
-        
         [pageSize]="filters.pageSize"
+        (page)="pageChanged($event)"
         showFirstLastButtons
         [pageSizeOptions]="[5,25, 50, 100, 250]">
       <!-- [pageIndex]="pagination.pageNumber -->

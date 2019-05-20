@@ -25,11 +25,9 @@ export class CreateUserComponent implements OnInit {
   constructor(private authService: AuthService,
               private router: Router,
               private rolesService: RolesService,
-              private alertService: AlertifyService, private fb: FormBuilder) {this.userRegister=new User() }
+              private alertService: AlertifyService, private fb: FormBuilder) {this.userRegister = new User() }
 
   ngOnInit() {
-    
-    console.log(this.userRegister);
      this.createRegisterForm();
      this.getAllRoles();
   }

@@ -22,7 +22,7 @@ export class UserService {
     const paginatedResult: PagedResult<any[]> = new PagedResult<any[]>();
     params = params.append('pageNumber', fitlers.pageNumber.toString());
     params = params.append('pageSize', fitlers.pageSize.toString());
-    params = params.append('email', fitlers.email.toString());
+    params = params.append('email', fitlers.email);
     return this.http.get(this.baseUrl , { observe: 'response', params})
     .pipe(
       map(response => {

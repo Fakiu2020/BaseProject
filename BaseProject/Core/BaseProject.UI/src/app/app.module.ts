@@ -4,8 +4,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
-import { HttpClient } from 'selenium-webdriver/http';
-import { NavComponent } from './nav/nav.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { CreateUserComponent, } from './users/create-user/create-user.component';
@@ -52,13 +51,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
-import {MatToolbarModule, MatExpansionModule, MatIconModule, 
+import {MatToolbarModule, MatExpansionModule, MatIconModule,
          MatButtonModule, MatMenuModule, MatCardModule,
-         MatFormFieldModule, MatInputModule, MatTableModule, 
-         MatPaginatorModule, MatProgressSpinnerModule, MatRadioModule,
-         MatCheckboxModule,MatDialogModule } 
-   from '@angular/material';
+         MatFormFieldModule, MatInputModule, MatTableModule,
+         MatPaginatorModule, MatSortModule, MatProgressSpinnerModule, MatRadioModule,
+         MatCheckboxModule, MatDialogModule, MatGridListModule, 
+         MatSidenavModule, MatListModule,   }
+from '@angular/material';
+
+
 import { ModalConfirmComponent } from './_helpers/modal-confirm/modal-confirm.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 
@@ -73,7 +77,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
    declarations: [
       AppComponent,
-      NavComponent,
+      SidebarComponent,
       HomeComponent,
       LoginComponent,
       CreateUserComponent,
@@ -81,7 +85,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       ListUserComponent,
       EditUserComponent,
       TimeAgoPipe,
-      ModalConfirmComponent
+      ModalConfirmComponent,
+      NavbarComponent
    ],
    imports: [
       BrowserModule,
@@ -89,6 +94,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       FormsModule,
       AppRoutingModule,
       
+      
+      MatSortModule,
+      MatGridListModule,
       MatRadioModule,
       MatDialogModule,
       MatCheckboxModule,
@@ -105,12 +113,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       MatButtonModule,
       MatInputModule,
 
-      AccordionModule.forRoot(),
-      BsDropdownModule.forRoot(),
-      TooltipModule.forRoot(),
-      ModalModule.forRoot(),
-      TabsModule.forRoot(),
-      BsDatepickerModule.forRoot(),
+  
       RouterModule.forRoot(appRoutes),
       NgxGalleryModule,
       FileUploadModule,
@@ -126,6 +129,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
          }
        }),
       BrowserAnimationsModule,
+      LayoutModule,
+      MatSidenavModule,
+      MatListModule,
      
    ],
    providers: [
@@ -139,6 +145,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       DetailUserResolver,
       ListUserResolver,
       PreventUnsavedChanges,
+      
       UserService,
       {
          provide: PERFECT_SCROLLBAR_CONFIG,

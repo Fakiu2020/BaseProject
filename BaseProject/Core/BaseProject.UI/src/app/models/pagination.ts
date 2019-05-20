@@ -13,4 +13,3 @@ export class PagedResult<T> {
         this.filters = new FilterBase();
     }
 }
-

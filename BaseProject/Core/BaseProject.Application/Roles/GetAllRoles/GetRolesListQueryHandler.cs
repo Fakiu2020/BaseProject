@@ -8,6 +8,7 @@ using BaseProject.Application.Common;
 using BaseProject.Application.Infrastructure.Request.Queries.GetById;
 using BaseProject.Application.Managers;
 using BaseProject.Application.Roles;
+using BaseProject.Application.Roles.GetAllRoles;
 using BaseProject.Application.Users.Queries.GetAllUsers;
 using BaseProject.Domain;
 using BaseProject.Persistence;
@@ -15,7 +16,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace BaseProject.Application.Users.Administrators.Queries.GetAdministratorDetailQuery
+namespace BaseProject.Application.Users.Administrators.Queries.GetAllRoles
 {
     public class GetRolesListQueryHandler : IRequestHandler<GetRolesListQuery, RolesLookupModel>
     {

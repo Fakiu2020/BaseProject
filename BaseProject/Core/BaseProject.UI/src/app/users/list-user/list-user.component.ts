@@ -1,35 +1,45 @@
 
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { BsModalRef } from 'ngx-bootstrap';
 import { ModalService } from 'src/app/_services/modal.service';
 import { UserFilter } from 'src/app/models/UserFilters';
+import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './list-user.component.html',
   styleUrls: ['./list-user.component.css']
 })
-export class ListUserComponent implements OnInit {
+export class ListUserComponent implements OnInit, AfterViewInit  {
   users: any [];
   isLoading = false;
 
-  displayedColumns: string[] = [ 'firstName', 'lastName' , 'email','actions'];
+  displayedColumns: string[] = [ 'firstName', 'lastName' , 'email', 'actions'];
   filters = new UserFilter();
 
+  public dataSource = new MatTableDataSource<User>();
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  modalRef: BsModalRef;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private userService: UserService,
               private alertify: AlertifyService,
               public dialogService: ModalService) { }
 
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+  
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.users = data.users.entity;
+      this.dataSource.data = this.users as User[];
       this.filters = data.users.filters;
     });
   }
@@ -44,7 +54,6 @@ export class ListUserComponent implements OnInit {
     this.userService.getUsers(this.filters).subscribe((res) => {
       this.users = res.entity;
       this.isLoading = false;
-      // this.filters = (res.filters);
     }, error => {
       this.isLoading = false;
       this.alertify.error(error);
@@ -62,14 +71,14 @@ export class ListUserComponent implements OnInit {
 
   delete(userSelected): void {
     this.dialogService.openConfirmDialog('Are you sure to delete this user ?')
-    .afterClosed().subscribe(res =>{
-      if(res){
-        this.userService.deleteUser(userSelected.id).subscribe(()=>{
-          this.getAll();     
-          this.alertify.success("User deleted successfully");
+    .afterClosed().subscribe(res => {
+      if (res) {
+        this.userService.deleteUser(userSelected.id).subscribe(() => {
+          this.getAll();
+          this.alertify.success('User deleted successfully');
         }, error => {
           this.alertify.error(error);
-        });         
+        });
       }
     });
   }

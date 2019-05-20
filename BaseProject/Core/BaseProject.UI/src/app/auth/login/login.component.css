@@ -1,5 +1,7 @@
 
-
+.form{
+  margin-top: 200px;
+}
 .mat-card {
     max-width: 400px;
     margin: 2em auto;
