@@ -20,8 +20,9 @@ export class UserService {
   getUsers(fitlers: UserFilter) : Observable<PagedResult<any[]>> {
     let params = new HttpParams();
     const paginatedResult: PagedResult<any[]> = new PagedResult<any[]>();
-    params = params.append('pageNumber', fitlers.pageNumber.toString());
-    params = params.append('pageSize', fitlers.pageSize.toString());
+    params = params.append('pageNumber', fitlers.pageNumber != null ? fitlers.pageNumber .toString() :  null );
+
+    params = params.append('pageSize',  fitlers.pageSize != null ? fitlers.pageSize .toString() :  null);
     params = params.append('email', fitlers.email);
     return this.http.get(this.baseUrl , { observe: 'response', params})
     .pipe(

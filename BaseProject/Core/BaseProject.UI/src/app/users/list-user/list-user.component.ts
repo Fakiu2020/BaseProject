@@ -24,6 +24,8 @@ export class ListUserComponent implements OnInit, AfterViewInit  {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private userService: UserService,
@@ -34,12 +36,13 @@ export class ListUserComponent implements OnInit, AfterViewInit  {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    
   }
   
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.users = data.users.entity;
-      this.dataSource.data = this.users as User[];
+      // this.users = data.users.entity;
+      this.dataSource.data =  data.users.entity as User[];
       this.filters = data.users.filters;
     });
   }

@@ -56,7 +56,7 @@ import {MatToolbarModule, MatExpansionModule, MatIconModule,
          MatFormFieldModule, MatInputModule, MatTableModule,
          MatPaginatorModule, MatSortModule, MatProgressSpinnerModule, MatRadioModule,
          MatCheckboxModule, MatDialogModule, MatGridListModule, 
-         MatSidenavModule, MatListModule,   }
+         MatSidenavModule, MatListModule  }
 from '@angular/material';
 
 
